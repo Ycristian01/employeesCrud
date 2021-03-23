@@ -1,0 +1,72 @@
+<h1 class="index-title">New employee</h1>
+<div class="ui centered grid">
+  <div>
+    <%= form_with model: @employee do |form| %>
+       <% if @employee.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+          <ul>
+            <% @employee.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+          
+        </div>
+      <% end %>
+      <form class="ui form">
+        <h4 class="ui dividing header">Employee information</h4>
+
+        <div class="field">
+          <label>Name</label>
+          <div class="two fields">
+            <div class="field">
+              <%= form.text_field :name, placeholder:"First name" %>
+            </div>
+            <div class="field">
+              <%= form.text_field :surname, placeholder:"Last name" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          
+          <div class="two fields">
+            <div class="field">
+              <label>Phone</label>
+              <%= form.text_field :phone, placeholder:"Phone number" %>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <%= form.text_field :email, placeholder:"Email" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="fields">
+        
+          <div class="seven wide field">
+            <label>Position</label>
+            <%= form.text_field :post, placeholder:"Position" %>
+          </div>
+
+          <div class="three wide field">
+            <label>Department</label>
+            <%= form.text_field :department, placeholder:"Department" %>
+          </div>
+
+          <div class="seven wide field">
+            <label>Salary</label>
+            <%= form.text_field :salary, placeholder:"Salary" %>
+          </div>
+
+        <div>
+        
+        <div>
+          <%= form.submit %>
+        </div>
+      </form>
+      
+    <% end %>
+  </div>
+</div>

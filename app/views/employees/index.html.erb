@@ -1,0 +1,9 @@
+<h1>This is the index</h1>
+
+<ul>
+  <% @employees.each do |employee| %>
+    <li>    
+      <%= link_to employee.name + " " + employee.surname, employee %>
+    </li>
+  <% end %>
+</ul>

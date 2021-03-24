@@ -10,6 +10,12 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def import 
+    Employee.import(params[:file])
+    redirect_to root_url, notice: "Employees imported"
+
+  end
+
   def show
     phone_first = @employee.phone[0,3]
     phone_mid = @employee.phone[3,3]

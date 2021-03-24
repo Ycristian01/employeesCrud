@@ -11,7 +11,7 @@ class Employee < ApplicationRecord
 
 
   def self.to_csv
-    attributes = %w{id name surname post department salary phone email}
+    attributes = %w{name surname phone email post salary department }
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
@@ -20,7 +20,15 @@ class Employee < ApplicationRecord
         csv << attributes.map{ |attr| employee.send(attr) }
       end
     end
-    
+
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      employee_hash = row.to_hash
+      employee = find_or_create_by!(email: employee_hash['email'])
+      employee.update(employee_hash)
+    end
   end
   
 end

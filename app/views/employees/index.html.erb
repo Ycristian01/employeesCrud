@@ -10,4 +10,16 @@
 
 <%= link_to "Add employee", new_employee_path %>
 
-<%= link_to('Export to csv', employees_path(format: :csv)) %>
+
+<%= form_tag import_employees_path, multipart: true, class: 'form-inline' do %>
+  <div class="form-group">
+    <%= link_to('Export to csv', employees_path(format: :csv)) %>
+  </div>
+  <div class="form-group">
+    <%= file_field_tag :file, class: '' %>
+  </div>
+  
+  <div class="form-group">
+    <%= submit_tag "Import CSV", class: 'btn btn-info' %>
+  </div>
+<% end %>

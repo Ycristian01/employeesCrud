@@ -14,7 +14,7 @@
           
         </div>
       <% end %>
-      <form class="ui form">
+      <div class="ui form">
         <h4 class="ui dividing header">Employee information</h4>
 
         <div class="field">
@@ -38,7 +38,7 @@
             </div>
             <div class="field">
               <label>Email</label>
-              <%= form.text_field :email, placeholder:"Email" %>
+              <%= form.text_field :email, placeholder:"employee@example.com" %>
             </div>
           </div>
         </div>
@@ -50,23 +50,24 @@
             <%= form.text_field :post, placeholder:"Position" %>
           </div>
 
-          <div class="three wide field">
+          <div class="five wide field">
             <label>Department</label>
-            <%= form.text_field :department, placeholder:"Department" %>
+            <%= form.select :department, options_for_select(["Accounting", "Finances", "Operations", "Security", "Human resources"]), {}, {class: "form-select form-select-sm"} %>
           </div>
 
-          <div class="seven wide field">
+          <div class="four wide field">
             <label>Salary</label>
             <%= form.text_field :salary, placeholder:"Salary" %>
           </div>
 
         <div>
+
         
-        <div>
-          <%= form.submit %>
-        </div>
-      </form>
       
+      </div>
+      <div class="actions">
+        <%= form.submit class:"ui primary button"%>
+      </div>
     <% end %>
   </div>
 </div>

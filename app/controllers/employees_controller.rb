@@ -16,11 +16,11 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
-      redirect_to @employee 
+      redirect_to @employee
       flash[:notice] = "Employee was successfully created"      
     else
       render 'new'
-      flash[:notice] = "Employee was not successfully created"
+      
       
     end
   end

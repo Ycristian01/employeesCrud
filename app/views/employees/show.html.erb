@@ -1,5 +1,36 @@
-<h1><%= @employee.name + " " + @employee.surname %></h1>
-
-<p><%= @employee.name %></p>
-
-<%=button_to "Back", employees_path, method: :get, class:"ui inverted green button"%>
+<div class="ui centered grid">
+  <div class="row">
+    <div class="ui card">
+      <div class="content">
+        <div class="header"><%=@employee.name + " " + @employee.surname%></div>
+        <div class="meta">
+          <a><%=@employee.post%></a>
+        </div>
+        <div class="description">
+          Working at <%=@employee.department%> area.
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="ui centered">
+          <i class="dollar sign icon"></i>
+          <%= @employee.salary %>
+        </span>
+      
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          <i class="at icon"></i>
+          <%= @employee.email %>
+        </span>
+        <span>
+          <i class="phone icon"></i>
+          <%= @employee.phone %>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%=button_to "Back", employees_path, method: :get, class:"ui inverted green button"%>
+  </div>
+</div>

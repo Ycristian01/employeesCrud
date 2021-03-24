@@ -3,6 +3,11 @@ class EmployeesController < ApplicationController
 
   def index
     @employees = Employee.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @employees.to_csv, filename: "employeesx -#{Date.today}.csv" }
+    end
   end
 
   def show
@@ -10,6 +15,23 @@ class EmployeesController < ApplicationController
     phone_mid = @employee.phone[3,3]
     phone_last = @employee.phone[6,4]
     @employee.phone = "("+phone_first+")"+phone_mid+"-"+phone_last
+    
+    if @employee.salary[0,1]=="$" 
+      @employee.salary =  @employee.salary[1, @employee.salary.size]
+    end
+    puts @employee.salary.size
+    whole, decimal = @employee.salary.to_s.split(".")
+    whole_with_commas = whole.chars.to_a.reverse.each_slice(3).map(&:join).join(".").reverse
+    @employee.salary= [whole_with_commas, decimal].compact.join(",")
+    @employee.salary = "$" + @employee.salary
+  end
+
+  def export_csv
+    employee_csv = Employee.find_by_sql("select * from employees_list limit 10")
+    respond_to do |format|
+      format.html
+      format.csv { send_data employee_csv.as_csv }
+    end
   end
 
   def new

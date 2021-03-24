@@ -31,6 +31,9 @@
   </div>
   
   <div class="row">
-    <%=button_to "Back", employees_path, method: :get, class:"ui inverted green button"%>
+    <div class="ui centered grid">
+     <%=button_to "Edit", edit_employee_path(@employee), method: :get, class:"ui inverted yellow button"%>
+     <%=button_to "Back", employees_path, method: :get, class:"ui inverted green button"%>
+    </div>
   </div>
 </div>

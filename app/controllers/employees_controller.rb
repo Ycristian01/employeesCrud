@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[ show edit update]
+  before_action :set_employee, only: %i[ show edit update destroy]
 
   def index
     @employees = Employee.all
@@ -17,19 +17,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    phone_first = @employee.phone[0,3]
-    phone_mid = @employee.phone[3,3]
-    phone_last = @employee.phone[6,4]
-    @employee.phone = "("+phone_first+")"+phone_mid+"-"+phone_last
     
-    if @employee.salary[0,1]=="$" 
-      @employee.salary =  @employee.salary[1, @employee.salary.size]
-    end
-    puts @employee.salary.size
-    whole, decimal = @employee.salary.to_s.split(".")
-    whole_with_commas = whole.chars.to_a.reverse.each_slice(3).map(&:join).join(".").reverse
-    @employee.salary= [whole_with_commas, decimal].compact.join(",")
-    @employee.salary = "$" + @employee.salary
   end
 
   def export_csv
@@ -65,6 +53,12 @@ class EmployeesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @employee.destroy
+    redirect_to employees_url
+    flash[:notice] = "Employee was successfully destroyed." 
   end
 
   private

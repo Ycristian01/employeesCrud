@@ -1,4 +1,4 @@
-<div class="ui centered grid">
+<div class="ui centered grid show-grid">
   <div class="row">
     <div class="ui card show-card">
       <div class="content">
@@ -13,7 +13,7 @@
       <div class="extra content">
         <span class="ui centered">
           <i class="dollar sign icon"></i>
-          <%= @employee.salary %>
+          <%= number_to_currency(@employee.salary, separator: ",", delimiter: ".") %>
         </span>
       
       </div>
@@ -24,7 +24,7 @@
         </span>
         <span>
           <i class="phone icon"></i>
-          <%= @employee.phone %>
+          <%= number_to_phone(@employee.phone, area_code: true)  %>
         </span>
       </div>
     </div>

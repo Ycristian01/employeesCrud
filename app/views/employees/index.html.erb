@@ -1,25 +1,73 @@
-<h1>This is the index</h1>
-
-<ul>
-  <% @employees.each do |employee| %>
-    <li>    
-      <%= link_to employee.name + " " + employee.surname, employee %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to "Add employee", new_employee_path %>
-
-
-<%= form_tag import_employees_path, multipart: true, class: 'form-inline' do %>
-  <div class="form-group">
-    <%= link_to('Export to csv', employees_path(format: :csv)) %>
-  </div>
-  <div class="form-group">
-    <%= file_field_tag :file, class: '' %>
+<h1 class="index-title">Employees</h1>
+<div class="ui centered grid">
+  <div class="row">
+    <table class="ui very basic collapsing celled table index-table">
+      <thead>
+        <tr><th>Employee</th>
+        <th>Position</th>
+        <th>Contact</th>
+        <th>Actions</th>
+      </tr></thead>
+      <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <td>
+            <h4 class="ui image header">
+              <i class="user icon"></i>
+              <div class="content">
+                <%= link_to employee.name + " " + employee.surname, employee %>
+                <div class="sub header"><%=employee.department%></div>
+              </div>
+          </h4></td>
+          <td>
+            <%=employee.post%>
+          </td>
+          <td>
+            <i class="at icon"></i>
+            <%= employee.email %>
+          </td>
+          <td>
+            <%= link_to edit_employee_path(employee) do %>
+              <i class="large yellow edit icon"></i>
+            <% end %>
+            <%= link_to employee, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="large red trash icon"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
   
-  <div class="form-group">
-    <%= submit_tag "Import CSV", class: 'btn btn-info' %>
+</div>
+
+<div class="ui centered grid index-table">
+  <div class="row">
+    <div class="column">
+      <%= link_to new_employee_path do %>
+        <i class="big green user plus icon"></i>
+      <% end %>
+    </div>
+    <div class="column">
+      <%= link_to employees_path(format: :csv) do %>
+        <i class="big blue cloud download icon"></i>
+      <%end%>
+    </div>
   </div>
-<% end %>
+
+  <div class="row">
+    <%= form_tag import_employees_path, multipart: true, class: 'form-inline' do %>
+
+    <div class="form-group">
+      <%= file_field_tag :file, class: '' %>
+    </div>
+    
+    <div class="form-group">
+      <%= submit_tag "Import CSV", class: 'small ui inverted blue button import-button' %>
+    </div>
+  <% end %>
+
+  </div>
+
+</div>
+

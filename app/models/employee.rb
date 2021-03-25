@@ -6,7 +6,7 @@ class Employee < ApplicationRecord
   validates :phone, numericality: true
   validates :phone, length: { is: 10 }
   validates :email, uniqueness: true
-  #validates :salary, numericality: true
+  validates :salary, numericality: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
 
 

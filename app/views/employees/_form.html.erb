@@ -3,13 +3,16 @@
     <%= form_with model: @employee do |form| %>
       <% if @employee.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+        <h2 class="red ui header"><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-        <ul>
+        <div class="ui list">
           <% @employee.errors.each do |error| %>
-            <li><%= error.full_message %></li>
+            <div class="item">
+              <i class="red times circle icon"></i>
+              <%= error.full_message %>
+            </div>
           <% end %>
-        </ul>
+        </div>
         
       </div>
       <% end %>

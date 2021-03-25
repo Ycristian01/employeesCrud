@@ -26,7 +26,8 @@ class Employee < ApplicationRecord
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       employee_hash = row.to_hash
-      employee = find_or_create_by!(email: employee_hash['email'])
+      employee = find_or_create_by!(name: employee_hash['name'], surname: employee_hash['surname'], phone: employee_hash['phone'],
+        email: employee_hash['email'], post: employee_hash['post'], salary: employee_hash['salary'], department: employee_hash['department'])
       employee.update(employee_hash)
     end
   end
